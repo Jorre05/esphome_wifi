@@ -424,11 +424,11 @@ void WiFiComponent::check_scanning_finished() {
                      if (!a.get_matches() && b.get_matches())
                        return false;
 
-                     if (a.get_matches() && b.get_matches()) {
+                     /*if (a.get_matches() && b.get_matches()) {
                        // if both match, check priority
                        if (a.get_priority() != b.get_priority())
                          return a.get_priority() > b.get_priority();
-                     }
+                     }*/
 
                      return a.get_rssi() > b.get_rssi();
                    });
