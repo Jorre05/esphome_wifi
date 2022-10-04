@@ -424,11 +424,11 @@ void WiFiComponent::check_scanning_finished() {
                      if (!a.get_matches() && b.get_matches())
                        return false;
 
-/*                     if (a.get_matches() && b.get_matches()) {
+                     if (a.get_matches() && b.get_matches()) {
                        // if both match, check priority
                        if (a.get_priority() != b.get_priority())
                          return a.get_priority() > b.get_priority();
-                     }*/
+                     }
 
                      return a.get_rssi() > b.get_rssi();
                    });
@@ -439,12 +439,13 @@ void WiFiComponent::check_scanning_finished() {
     sprintf(bssid_s, "%02X:%02X:%02X:%02X:%02X:%02X", bssid[0], bssid[1], bssid[2], bssid[3], bssid[4], bssid[5]);
 
     if (res.get_matches()) {
-      ESP_LOGI(TAG, "- '%s' %s" LOG_SECRET("(%s) ") "%s", res.get_ssid().c_str(),res.get_is_hidden() ? "(HIDDEN) " : "", bssid_s, LOG_STR_ARG(get_signal_bars(res.get_rssi())));
+      ESP_LOGI(TAG, "- '%s' %s" LOG_SECRET("(%s) ") "%s", res.get_ssid().c_str(),
+               res.get_is_hidden() ? "(HIDDEN) " : "", bssid_s, LOG_STR_ARG(get_signal_bars(res.get_rssi())));
       ESP_LOGD(TAG, "    Channel: %u", res.get_channel());
       ESP_LOGD(TAG, "    RSSI: %d dB", res.get_rssi());
-      ESP_LOGD(TAG, "    Priority: %.1f", res.get_priority());
     } else {
-      ESP_LOGD(TAG, "- " LOG_SECRET("'%s'") " " LOG_SECRET("(%s) ") "%s", res.get_ssid().c_str(), bssid_s,LOG_STR_ARG(get_signal_bars(res.get_rssi())));
+      ESP_LOGD(TAG, "- " LOG_SECRET("'%s'") " " LOG_SECRET("(%s) ") "%s", res.get_ssid().c_str(), bssid_s,
+               LOG_STR_ARG(get_signal_bars(res.get_rssi())));
     }
   }
 
